@@ -3,24 +3,24 @@ import { useState } from 'react'
 export default function useArray(arr) {
 	const [array, setArray] = useState(arr)
 
-	function push(arrEl) {
-		setArray((a) => [...a, arrEl])
+	function push(el) {
+		setArray((arr) => [...arr, el])
 	}
 
 	function filter(callback) {
-		setArray((a) => a.filter(callback))
+		setArray((arr) => arr.filter(callback))
 	}
 
-	function update(idx, newArrEl) {
-		setArray((a) => [
-			...a.slice(0, idx),
-			newArrEl,
-			...a.slice(idx + 1, a.length),
+	function update(idx, el) {
+		setArray((arr) => [
+			...arr.slice(0, idx),
+			el,
+			...arr.slice(idx + 1, arr.length),
 		])
 	}
 
 	function remove(idx) {
-		setArray((a) => [...a.slice(0, idx), ...a.slice(idx + 1, a.length)])
+		setArray((arr) => [...arr.slice(0, idx), ...arr.slice(idx + 1, arr.length)])
 	}
 
 	function clear() {
