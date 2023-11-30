@@ -3,6 +3,8 @@ import WindowSize from '@/components/WindowSize'
 import Hover from '@/components/Hover'
 import Array from '@/components/Array'
 
+import ArrayUpdate from '@/components/ArrayUpdate'
+
 export default function App() {
 	return (
 		<main>
@@ -18,23 +20,20 @@ export default function App() {
 				<Hover />
 				<Array />
 
+				<ArrayUpdate />
+
 				<div className='card'>
-					<span className='text-yellow-400 italic flex place-content-center place-items-center h-full font-extrabold'>
+					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
 						( Card Placeholder )
 					</span>
 				</div>
 				<div className='card'>
-					<span className='text-yellow-400 italic flex place-content-center place-items-center h-full font-extrabold'>
+					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
 						( Card Placeholder )
 					</span>
 				</div>
 				<div className='card'>
-					<span className='text-yellow-400 italic flex place-content-center place-items-center h-full font-extrabold'>
-						( Card Placeholder )
-					</span>
-				</div>
-				<div className='card'>
-					<span className='text-yellow-400 italic flex place-content-center place-items-center h-full font-extrabold'>
+					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
 						( Card Placeholder )
 					</span>
 				</div>
