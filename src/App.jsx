@@ -2,6 +2,7 @@ import EventListener from '@/components/EventListener'
 import WindowSize from '@/components/WindowSize'
 import Hover from '@/components/Hover'
 import Array from '@/components/Array'
+import ClickOutside from '@/components/ClickOutside'
 
 import ArrayUpdate from '@/components/ArrayUpdate'
 
@@ -22,6 +23,8 @@ export default function App() {
 
 				<ArrayUpdate />
 
+				<ClickOutside />
+				
 				<div className='card'>
 					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
 						( Card Placeholder )
@@ -32,12 +35,7 @@ export default function App() {
 						( Card Placeholder )
 					</span>
 				</div>
-				<div className='card'>
-					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
-						( Card Placeholder )
-					</span>
-				</div>
-			</div>
+			</div>			
 		</main>
 	)
 }

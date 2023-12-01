@@ -1,45 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
-
-const styles = {
-	wrapper: `flex flex-col gap-4 w-full px-2`,
-	array: `flex py-1 overflow-hidden place-content-center whitespace-nowrap text-ellipsis`,
-	btns: `flex flex-col gap-6 items-center`,
-	action: `w-3/4 hover:text-red-600 hover:bg-yellow-400`,
-	reset: `w-1/2 hover:text-white hover:bg-green-600`,
-	btn: (btnType) => {
-		return `flex p-1 text-xs font-bold transition-colors duration-300 border-none rounded bg-slate-100 text-neutral-900 place-content-center place-items-center`.concat(
-			' ',
-			btnType
-		)
-	},
-}
-
-const InputModal = ({ openModal, closeModal, children }) => {
-	const ref = useRef()
-
-	useEffect(() => {
-		if (!ref.current) return
-		if (openModal) {
-			ref.current.showModal()
-		} else {
-			ref.current.close()
-		}
-	}, [openModal])
-
-	return (
-		<dialog
-			className='w-1/2 p-8 m-auto border-2 rounded-lg'
-			ref={ref}
-			onCancel={closeModal}>
-			{children}
-			<button
-				className='absolute font-extrabold transition-colors border-2 border-black rounded-full w-7 aspect-square top-2 right-2 hover:bg-black hover:text-white'
-				onClick={closeModal}>
-				X
-			</button>
-		</dialog>
-	)
-}
+import { useRef, useState } from 'react'
+import CustomModal from '@/components/ui/CustomModal'
+import CustomButton from '@/components/ui/CustomButton'
 
 const InputForm = ({ array, onFormSubmit }) => {
 	const [option, setOption] = useState('')
@@ -134,7 +95,7 @@ const InputForm = ({ array, onFormSubmit }) => {
 	}
 
 	return (
-		<div className='p-3'>
+		<div className='p-3 text-sm'>
 			<form
 				className='flex flex-col gap-4'
 				onSubmit={handleSubmit}>
@@ -145,17 +106,18 @@ const InputForm = ({ array, onFormSubmit }) => {
 						id='option'
 						value={option}
 						onChange={handleOptionChange}
-						className='text-2xl text-center border-2 border-black rounded-lg w-max pe-4'>
+						className='text-sm text-center border-2 border-black rounded-lg pe-4'>
 						<option
+              className='text-sm'
 							value=''
 							disabled>
-							Select option
+							Select an option...
 						</option>
 						{options.map((option, index) => (
 							<option
 								key={index}
 								value={option}
-								className='text-black'>
+								className='text-sm text-black'>
 								{option}
 							</option>
 						))}
@@ -183,7 +145,7 @@ const InputForm = ({ array, onFormSubmit }) => {
 								<option
 									value=''
 									disabled>
-									Select position
+									Select a position...
 								</option>
 								{array.map((_, index) => (
 									<option
@@ -208,7 +170,7 @@ const InputForm = ({ array, onFormSubmit }) => {
 								<option
 									value=''
 									disabled>
-									Select position
+									Select a position...
 								</option>
 								{array.map((_, index) => (
 									<option
@@ -223,7 +185,7 @@ const InputForm = ({ array, onFormSubmit }) => {
 					)}
 					{showVal && (
 						<div className='flex flex-col gap-1'>
-							<label htmlFor='val'>What value?</label>
+							<label htmlFor='val'>Enter a value...</label>
 							<input
 								type='text'
 								id='val'
@@ -252,11 +214,12 @@ const InputForm = ({ array, onFormSubmit }) => {
 }
 
 export default function ArrayUpdate() {
-	const [modal, setModal] = useState(false)
+	const [open, setOpen] = useState(false)
 	const { array, methods } = useArray()
+	const modalRef = useRef(null)
 
-	const handleModalOpen = () => setModal(true)
-	const handleModalClose = () => setModal(false)
+	const openModal = () => setOpen(true)
+	const closeModal = () => setOpen(false)
 
 	const handleFormSubmit = (option, idx1, idx2, val) => {
 		switch (option) {
@@ -290,38 +253,44 @@ export default function ArrayUpdate() {
 			default:
 				break
 		}
-		handleModalClose()
+		closeModal()
 	}
 
 	return (
 		<div className='card'>
 			<div className='text-blue-400 card-title'>FUN WITH ARRAYS</div>
 			<div className='card-content'>
-				<div className={styles.wrapper}>
-					<div className={styles.array}>[ {array.join(', ')} ]</div>
-					<div className={styles.btns}>
-						<button
-							className={styles.btn(styles.action)}
-							onClick={handleModalOpen}>
-							Do something fun...
-						</button>
-
-						<button
-							className={styles.btn(styles.reset)}
-							onClick={methods.reset}>
-							Reset
-						</button>
+				<div className='flex flex-col gap-4 px-1'>
+					<div className='overflow-hidden text-center place-content-center whitespace-nowrap text-ellipsis'>
+						[ {array.join(', ')} ]
+					</div>
+					<div className='relative flex flex-col items-center gap-6'>
+						{!open && (
+            <>
+              <CustomButton
+  							className='w-3/4 border hover:border-yellow-400 hover:text-red-600 hover:bg-yellow-400'
+  							onClick={openModal}>
+  							Do something fun...
+  						</CustomButton>
+  						<CustomButton
+  							className='w-1/2 border hover:border-green-600 hover:text-white hover:bg-green-600'
+  							onClick={methods.reset}>
+  							Reset
+  						</CustomButton>
+            </>
+            )}
+						<CustomModal
+							open={open}
+							closeModal={closeModal}
+							ref={modalRef}>
+							<InputForm
+								array={array}
+								onFormSubmit={handleFormSubmit}
+							/>
+						</CustomModal>
 					</div>
 				</div>
 			</div>
-			<InputModal
-				openModal={modal}
-				closeModal={handleModalClose}>
-				<InputForm
-					array={array}
-					onFormSubmit={handleFormSubmit}
-				/>
-			</InputModal>
 		</div>
 	)
 }

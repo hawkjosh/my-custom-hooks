@@ -32,7 +32,7 @@ body {
 			@apply grid grid-cols-none gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4;
 
 			& .card {
-				@apply rounded p-2 border-2 flex flex-col gap-4 min-h-[14rem];
+				@apply rounded p-2 border-2 flex flex-col gap-4 min-h-[14rem] [&:nth-of-type(5)]:border-blue-400;
 
 				& .card-title {
 					@apply font-semibold text-lg underline text-center underline-offset-4;
