@@ -15,7 +15,7 @@ export default function App() {
 					A collection of custom React hooks designed by yours truly!
 				</div>
 			</div>
-			<div className='app-grid'>
+			<div className='relative app-grid'>
 				<EventListener />
 				<WindowSize />
 				<Hover />
