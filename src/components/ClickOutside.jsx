@@ -1,42 +1,43 @@
 import { useRef, useState } from 'react'
 import useClickOutside from '@/hooks/useClickOutside'
-import CustomModal from '@/components/ui/CustomModal'
-import CustomButton from '@/components/ui/CustomButton'
+import Modal from '@/components/ui/Modal'
+import Button from '@/components/ui/Button'
 
 export default function ClickOutsideComponent() {
 	const [open, setOpen] = useState(false)
 	const modalRef = useRef(null)
 
-	const openModal = () => setOpen(true)
-	const closeModal = () => setOpen(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
 
-	useClickOutside(modalRef, closeModal)
+	useClickOutside(modalRef, handleClose)
 
 	return (
 		<div className='card'>
 			<div className='card-title'>useClickOutside</div>
 			<div className='relative card-content'>
-				<CustomButton
-					className='bg-slate-100 text-neutral-900 hover:text-red-600 hover:bg-yellow-400'
-					onClick={openModal}>
-					Open
-				</CustomButton>
-				<CustomModal
+				<Button
+					label='Open'
+					className='px-2 py-1 border rounded-md hover:text-red-600 hover:bg-yellow-400 hover:border-yellow-400'
+					onClick={handleOpen}
+				/>
+				<Modal
 					open={open}
-					closeModal={closeModal}
+					onClose={handleClose}
 					ref={modalRef}
 					className='bg-gray-600'>
 					<div className='flex flex-col justify-between h-full'>
 						<div className='text-center'>
-							You can click the close button OR click outside this area to close it!
+							You can click the button below OR click outside this area to close
+							it!
 						</div>
-						<CustomButton
-							onClick={closeModal}
-							className='border hover:bg-red-500 w-fit place-self-center'>
-							Close
-						</CustomButton>
+						<Button
+							label='Close'
+							className='px-2 py-1 border rounded-md hover:bg-red-500 place-self-center'
+							onClick={handleClose}
+						/>
 					</div>
-				</CustomModal>
+				</Modal>
 			</div>
 		</div>
 	)
