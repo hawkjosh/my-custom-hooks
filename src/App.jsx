@@ -1,3 +1,5 @@
+import { Card, CardPlaceholder } from '@/components/ui/Card'
+
 import EventListener from '@/components/EventListener'
 import WindowSize from '@/components/WindowSize'
 import Hover from '@/components/Hover'
@@ -14,26 +16,34 @@ export default function App() {
 				</div>
 			</div>
 			<div className='app-grid'>
-				<EventListener />
-				<WindowSize />
-				<Hover />
-				<Array />
-				<ClickOutside />
-				<div className='card'>
-					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
-						( Card Placeholder )
-					</span>
-				</div>
-				<div className='card'>
-					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
-						( Card Placeholder )
-					</span>
-				</div>
-				<div className='card'>
-					<span className='flex h-full italic font-extrabold text-yellow-400 place-content-center place-items-center'>
-						( Card Placeholder )
-					</span>
-				</div>
+				<Card
+					title='useEventListener'
+					content={<EventListener />}
+					relative
+				/>
+				<Card
+					title='useWindowSize'
+					content={<WindowSize />}
+					relative
+				/>
+				<Card
+					title='useHover'
+					content={<Hover />}
+					relative
+				/>
+				<Card
+					title='useArray'
+					content={<Array />}
+				/>
+				<Card
+					title='useClickOutside'
+					content={<ClickOutside />}
+					relative
+				/>
+
+				<CardPlaceholder />
+				<CardPlaceholder />
+				<CardPlaceholder />
 			</div>
 		</main>
 	)
