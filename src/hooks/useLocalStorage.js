@@ -9,19 +9,20 @@ const clearLocalStorageByKey = (key) => {
 	window.localStorage.removeItem(key)
 }
 
-const useLocalStorage = (key, defaultValue) => {
+export default function useLocalStorage(key, defaultVal) {
 	const [data, setData] = useState(() => {
 		const item = window.localStorage.getItem(key)
-		return item ? JSON.parse(item) : defaultValue
+		return item ? JSON.parse(item) : defaultVal
 	})
 
 	const set = useCallback(
-		(localStorageData) => {
-			writeToLocalStorage(key, localStorageData)
-			setData(localStorageData)
+		(storageData) => {
+			writeToLocalStorage(key, storageData)
+			setData(storageData)
 		},
 		[key]
 	)
+
 	const remove = useCallback(() => {
 		clearLocalStorageByKey(key)
 		setData(undefined)
@@ -30,7 +31,7 @@ const useLocalStorage = (key, defaultValue) => {
 	useEffect(() => {
 		const handler = () => {
 			const item = window.localStorage.getItem(key)
-			setData(item ? JSON.parse(item) : defaultValue)
+			setData(item ? JSON.parse(item) : defaultVal)
 		}
 
 		window.addEventListener('storage', handler)
@@ -38,9 +39,7 @@ const useLocalStorage = (key, defaultValue) => {
 		return () => {
 			window.removeEventListener('storage', handler)
 		}
-	}, [key, defaultValue])
+	}, [key, defaultVal])
 
 	return [data, set, remove]
 }
-
-export default useLocalStorage
