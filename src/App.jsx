@@ -5,6 +5,7 @@ import WindowSize from '@/components/WindowSize'
 import Hover from '@/components/Hover'
 import Array from '@/components/Array'
 import ClickOutside from '@/components/ClickOutside'
+import LocalStorage from '@/components/LocalStorage'
 
 export default function App() {
 	return (
@@ -40,8 +41,12 @@ export default function App() {
 					content={<ClickOutside />}
 					relative
 				/>
+				<Card
+					title='useLocalStorage'
+					content={<LocalStorage />}
+					relative
+				/>
 
-				<CardPlaceholder />
 				<CardPlaceholder />
 				<CardPlaceholder />
 			</div>

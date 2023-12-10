@@ -13,7 +13,7 @@ const Select = ({
 		<label
 			htmlFor={name}
 			className='flex flex-col gap-2 text-lg'>
-			{label}:
+			{label && `${label}:`}
 			<select
 				name={name}
 				value={value}

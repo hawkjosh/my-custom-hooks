@@ -175,10 +175,12 @@ export default function Array() {
 							btnType='submit'
 							btnStyle='open'
 							disabled={
-								!formData.option ||
-								([3, 6, 8, 9].includes(formData.option) && !formData.idx1) ||
-								(formData.option === 9 && !formData.idx2) ||
-								([1, 2, 3, 7, 8].includes(formData.option) && !formData.val)
+								formData.option === '' ||
+								(formData.option === 6 && formData.idx1 === '') ||
+								([1, 2, 7].includes(formData.option) && formData.val === '') ||
+								([3, 8].includes(formData.option) &&
+									(formData.idx1 === '' || formData.val === '')) ||
+								(formData.option === 9 && (formData.idx1 === '' || formData.idx2 === ''))
 							}
 							className='grid-col-5'
 						/>
