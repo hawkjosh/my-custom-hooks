@@ -6,6 +6,7 @@ import Hover from '@/components/Hover'
 import Array from '@/components/Array'
 import ClickOutside from '@/components/ClickOutside'
 import LocalStorage from '@/components/LocalStorage'
+import Toggle from '@/components/Toggle'
 
 export default function App() {
 	return (
@@ -46,8 +47,12 @@ export default function App() {
 					content={<LocalStorage />}
 					relative
 				/>
+				<Card
+					title='useToggle'
+					content={<Toggle />}
+					relative
+				/>
 
-				<CardPlaceholder />
 				<CardPlaceholder />
 			</div>
 		</main>
